@@ -7,6 +7,10 @@ Rails.application.routes.draw do
           get "find_all"
           get "random"
         end
+        member do
+          get "invoices"
+          get "transactions"
+        end
       end
 
       resources :merchants, except: [:new, :edit], defaults: { format: :json } do

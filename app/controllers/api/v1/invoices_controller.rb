@@ -17,6 +17,10 @@ class Api::V1::InvoicesController < ApplicationController
     respond_with Invoice.where(invoice_params)
   end
 
+  def random
+    respond_with Invoice.order("RANDOM()").first
+  end
+
   private
 
   def invoice_params

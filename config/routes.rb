@@ -5,19 +5,22 @@ Rails.application.routes.draw do
         collection do
           get "find"
           get "find_all"
+          get "random"
         end
       end
-      
+
       resources :merchants, except: [:new, :edit], defaults: { format: :json } do
         collection do
           get "find"
           get "find_all"
+          get "random"
         end
       end
       resources :invoices, except: [:new, :edit], defaults: { format: :json } do
         collection do
           get "find"
           get "find_all"
+          get "random"
         end
       end
 
@@ -25,6 +28,7 @@ Rails.application.routes.draw do
         collection do
           get "find"
           get "find_all"
+          get "random"
         end
       end
 
@@ -32,6 +36,7 @@ Rails.application.routes.draw do
         collection do
           get "find"
           get "find_all"
+          get "random"
         end
       end
 
@@ -39,6 +44,7 @@ Rails.application.routes.draw do
         collection do
           get "find"
           get "find_all"
+          get "random"
         end
       end
     end

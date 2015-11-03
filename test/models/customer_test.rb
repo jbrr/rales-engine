@@ -7,7 +7,7 @@ class CustomerTest < ActiveSupport::TestCase
     @customer = customers(:one)
   end
 
-    test "a customer has invoices" do
+  test "a customer has invoices" do
     assert customer.methods.include?(:invoices)
   end
 

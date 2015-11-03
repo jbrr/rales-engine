@@ -6,7 +6,7 @@ class Api::V1::TransactionsController < ApplicationController
   end
 
   def show
-    respond_with Transaction.find(:id)
+    respond_with Transaction.find(params[:id])
   end
 
   def find
@@ -19,6 +19,10 @@ class Api::V1::TransactionsController < ApplicationController
 
   def random
     respond_with Transaction.order("RANDOM()").first
+  end
+
+  def invoice
+    respond_with Transaction.find_by(transaction_params).invoice
   end
 
   private

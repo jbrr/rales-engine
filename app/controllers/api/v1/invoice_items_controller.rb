@@ -10,7 +10,7 @@ class Api::V1::InvoiceItemsController < ApplicationController
   end
 
   def find
-    respond_with InvoiceItem.find(invoice_item_params)
+    respond_with InvoiceItem.find_by(invoice_item_params)
   end
 
   def find_all
@@ -32,6 +32,7 @@ class Api::V1::InvoiceItemsController < ApplicationController
   private
 
   def invoice_item_params
+    unit_price
     params.permit(:id,
                   :item_id,
                   :invoice_id,
@@ -39,5 +40,11 @@ class Api::V1::InvoiceItemsController < ApplicationController
                   :unit_price,
                   :created_at,
                   :updated_at)
+  end
+
+  def unit_price
+    if params[:unit_price]
+      params["unit_price"] = BigDecimal.new(params["unit_price"]) * 100
+    end
   end
 end

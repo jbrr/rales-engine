@@ -10,7 +10,7 @@ class Api::V1::InvoiceItemsController < ApplicationController
   end
 
   def find
-    respond_with InvoiceItem.find(invoice_item_params)
+    respond_with InvoiceItem.find_by(invoice_item_params)
   end
 
   def find_all

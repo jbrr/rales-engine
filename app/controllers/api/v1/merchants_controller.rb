@@ -30,7 +30,7 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def revenue
-    respond_with Merchant.revenue(params[:id])
+    respond_with Merchant.revenue(merchant_params)
   end
 
   private
@@ -39,6 +39,7 @@ class Api::V1::MerchantsController < ApplicationController
     params.permit(:id,
                   :name,
                   :created_at,
-                  :updated_at)
+                  :updated_at,
+                  :date)
   end
 end

@@ -9,10 +9,6 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
     @transaction = Transaction.create(id: 3, invoice_id: invoice.id)
   end
 
-  def json_response
-    JSON.parse(response.body)
-  end
-
   test "#index" do
     get :index, format: :json
 

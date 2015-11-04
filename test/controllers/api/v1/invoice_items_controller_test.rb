@@ -12,10 +12,6 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
                                          quantity: 5)
   end
 
-  def json_response
-    JSON.parse(response.body)
-  end
-
   test "#index" do
     get :index, format: :json
 

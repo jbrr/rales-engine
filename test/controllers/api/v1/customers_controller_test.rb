@@ -4,9 +4,9 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
   attr_reader :customer, :invoice, :transaction
 
   def setup
-    @customer = customers(:one)
-    @invoice = Invoice.create(id: 5, customer_id: customer.id)
-    @transaction = Transaction.create(id: 3, invoice_id: invoice.id)
+    @customer = Customer.create(id: 1, first_name: "Jeff", last_name: "Jeff")
+    @invoice = Invoice.create(id: 5, customer_id: 1)
+    @transaction = Transaction.create(id: 3, invoice_id: 5)
   end
 
   test "#index" do

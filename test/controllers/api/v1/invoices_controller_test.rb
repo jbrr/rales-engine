@@ -13,8 +13,11 @@ class Api::V1::InvoicesControllerTest < ActionController::TestCase
                               customer_id: 6,
                               merchant_id: 7,
                               status: "shipped")
-    @transaction = Transaction.create(id: 5, invoice_id: invoice.id)
-    @invoice_item = InvoiceItem.create(id: 9, invoice_id: invoice.id)
+    @transaction = Transaction.create(id: 5, invoice_id: 1)
+    @invoice_item = InvoiceItem.create(id: 9, invoice_id: 1, item_id: 18)
+    @item = Item.create(id: 18)
+    @customer = Customer.create(id: 6)
+    @merchant = Merchant.create(id: 7)
   end
 
   test "#index" do
@@ -42,5 +45,40 @@ class Api::V1::InvoicesControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal Array, json_response.class
     assert_equal invoice.customer_id, json_response[0]["customer_id"]
+  end
+
+  test "#transactions" do
+    get :transactions, format: :json, id: invoice.id
+
+    assert_response :success
+    assert_equal transaction.id, json_response[0]["id"]
+  end
+
+  test "#invoice_items" do
+    get :invoice_items, format: :json, id: invoice.id
+
+    assert_response :success
+    assert_equal invoice_item.id, json_response[0]["id"]
+  end
+
+  test "#items" do
+    get :items, format: :json, id: invoice.id
+
+    assert_response :success
+    assert_equal item.id, json_response[0]["id"]
+  end
+
+  test "#customer" do
+    get :customer, format: :json, id: invoice.id
+
+    assert_response :success
+    assert_equal customer.id, json_response["id"]
+  end
+
+  test "#merchant" do
+    get :merchant, format: :json, id: invoice.id
+
+    assert_response :success
+    assert_equal merchant.id, json_response["id"]
   end
 end

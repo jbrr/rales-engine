@@ -10,7 +10,7 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def find
-    respond_with Merchant.find(merchant_params)
+    respond_with Merchant.find_by(merchant_params)
   end
 
   def find_all

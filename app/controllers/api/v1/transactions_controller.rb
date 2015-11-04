@@ -10,7 +10,7 @@ class Api::V1::TransactionsController < ApplicationController
   end
 
   def find
-    respond_with Transaction.find(transaction_params)
+    respond_with Transaction.find_by(transaction_params)
   end
 
   def find_all

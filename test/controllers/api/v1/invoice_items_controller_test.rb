@@ -7,9 +7,9 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
     @item = Item.create(id: 15)
     @invoice = Invoice.create(id: 4)
     @invoice_item = InvoiceItem.create(id: 3,
-                                         invoice_id: invoice.id,
-                                         item_id: item.id,
-                                         quantity: 5)
+                                       invoice_id: invoice.id,
+                                       item_id: item.id,
+                                       quantity: 5)
   end
 
   test "#index" do

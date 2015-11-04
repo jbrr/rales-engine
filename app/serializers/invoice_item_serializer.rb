@@ -1,9 +1,9 @@
-class ItemSerializer < ActiveModel::Serializer
+class InvoiceItemSerializer < ActiveModel::Serializer
   attributes :id,
-             :name,
-             :description,
+             :item_id,
+             :invoice_id,
+             :quantity,
              :unit_price,
-             :merchant_id,
              :created_at,
              :updated_at
 

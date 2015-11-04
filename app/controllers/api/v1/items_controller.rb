@@ -10,7 +10,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def find
-    respond_with Item.find(item_params)
+    respond_with Item.find_by(item_params)
   end
 
   def find_all
@@ -32,6 +32,7 @@ class Api::V1::ItemsController < ApplicationController
   private
 
   def item_params
+    unit_price
     params.permit(:id,
                   :name,
                   :description,
@@ -39,5 +40,11 @@ class Api::V1::ItemsController < ApplicationController
                   :merchant_id,
                   :created_at,
                   :updated_at)
+  end
+
+  def unit_price
+    if params[:unit_price]
+      params["unit_price"] = BigDecimal.new(params["unit_price"]) * 100
+    end
   end
 end

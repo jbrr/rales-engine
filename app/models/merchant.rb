@@ -13,4 +13,10 @@ class Merchant < ActiveRecord::Base
     revenue_format = (rev.to_f / 100).to_s
     { revenue: revenue_format }
   end
+
+  def self.favorite_customer(id)
+    merchant = Merchant.find(id)
+    customer_id = merchant.invoices.successful_transactions.group_by(&:customer_id).max_by { |k, v| v.count }.flatten.first
+    Customer.find(customer_id)
+  end
 end

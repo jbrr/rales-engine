@@ -36,7 +36,7 @@ class Api::V1::ItemsController < ApplicationController
   private
 
   def item_params
-    unit_price
+    format_unit_price
     params.permit(:id,
                   :name,
                   :description,
@@ -44,11 +44,5 @@ class Api::V1::ItemsController < ApplicationController
                   :merchant_id,
                   :created_at,
                   :updated_at)
-  end
-
-  def unit_price
-    if params[:unit_price]
-      params["unit_price"] = BigDecimal.new(params["unit_price"]) * 100
-    end
   end
 end

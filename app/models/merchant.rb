@@ -9,7 +9,6 @@ class Merchant < ActiveRecord::Base
     else
       rev = successful_invoices.joins(:invoice_items).sum("unit_price * quantity")
     end
-    revenue_format(rev)
   end
 
   def favorite_customer
@@ -19,10 +18,6 @@ class Merchant < ActiveRecord::Base
 
   def pending_customers
     invoices.pending_transactions.map(&:customer).uniq
-  end
-
-  def revenue_format(revenue)
-    { revenue: (revenue.to_f / 100).to_s }
   end
 
   def successful_invoices

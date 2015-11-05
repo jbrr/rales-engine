@@ -30,7 +30,8 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def revenue
-    respond_with Merchant.find(params[:id]).revenue(merchant_params)
+    merchant = Merchant.find(params[:id]).revenue(merchant_params)
+    respond_with serialized_message(merchant)
   end
 
   def favorite_customer
@@ -49,5 +50,9 @@ class Api::V1::MerchantsController < ApplicationController
                   :created_at,
                   :updated_at,
                   :date)
+  end
+
+  def serialized_message(merchant)
+    MerchantSerializer.new(merchant).revenue
   end
 end

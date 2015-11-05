@@ -30,15 +30,15 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def revenue
-    respond_with Merchant.revenue(merchant_params)
+    respond_with Merchant.find(params[:id]).revenue(merchant_params)
   end
 
   def favorite_customer
-    respond_with Merchant.favorite_customer(params[:id])
+    respond_with Merchant.find(params[:id]).favorite_customer
   end
 
   def customers_with_pending_invoices
-    respond_with Merchant.pending_customers(params[:id])
+    respond_with Merchant.find(params[:id]).pending_customers
   end
 
   private

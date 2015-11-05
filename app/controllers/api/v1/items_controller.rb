@@ -30,7 +30,8 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def best_day
-    respond_with Item.find(params[:id]).best_day
+    item = Item.find(params[:id]).best_day
+    respond_with serialized_message(item)
   end
 
   private
@@ -45,4 +46,8 @@ class Api::V1::ItemsController < ApplicationController
                   :created_at,
                   :updated_at)
   end
+end
+
+def serialized_message(item)
+  ItemSerializer.new(item).best_day
 end

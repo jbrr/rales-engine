@@ -9,7 +9,8 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
     @invoice_item = InvoiceItem.create(id: 3,
                                        invoice_id: invoice.id,
                                        item_id: item.id,
-                                       quantity: 5)
+                                       quantity: 5,
+                                       unit_price: 5443)
   end
 
   test "#index" do
@@ -30,6 +31,13 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
 
     assert_response :success
     assert_equal invoice_item.quantity, json_response["quantity"]
+  end
+
+  test "#find by unit_price" do
+    get :find, format: :json, unit_price: "54.43"
+
+    assert_response :success
+    assert_equal invoice_item.id, json_response["id"]
   end
 
   test "#find_all" do

@@ -4,7 +4,7 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
   attr_reader :item, :invoice_item, :merchant
 
   def setup
-    @item = Item.create(id: 1, merchant_id: 5, name: "stuff")
+    @item = Item.create(id: 1, merchant_id: 5, name: "stuff", unit_price: 4372)
     @invoice_item = InvoiceItem.create(id: 4, item_id: 1)
     @merchant = Merchant.create(id: 5)
   end
@@ -23,6 +23,13 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
 
   test "#find" do
     get :find, format: :json, name: item.name
+
+    assert_response :success
+    assert_equal item.id, json_response["id"]
+  end
+
+  test "#find with unit_price" do
+    get :find, format: :json, unit_price: "43.72"
 
     assert_response :success
     assert_equal item.id, json_response["id"]

@@ -22,6 +22,6 @@ class Merchant < ActiveRecord::Base
 
   def self.pending_customers(id)
     merchant = Merchant.find(id)
-    merchant.invoices.pending_transactions.joins(:customer).distinct
+    merchant.invoices.pending_transactions.map{ |invoice| invoice.customer }.uniq
   end
 end

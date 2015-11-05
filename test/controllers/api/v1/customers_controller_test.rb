@@ -5,8 +5,9 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
 
   def setup
     @customer = Customer.create(id: 1, first_name: "Jeff", last_name: "Jeff")
-    @invoice = Invoice.create(id: 5, customer_id: 1)
-    @transaction = Transaction.create(id: 3, invoice_id: 5)
+    @invoice = Invoice.create(id: 5, customer_id: 1, merchant_id: 4)
+    Merchant.create(id: 4, name: "Stuff")
+    @transaction = Transaction.create(id: 3, invoice_id: 5, result: "success")
   end
 
   test "#index" do
@@ -59,5 +60,12 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
 
     assert_response :success
     assert_equal transaction.id, json_response[0]["id"]
+  end
+
+  test "#favorite_merchant" do
+    get :favorite_merchant, format: :json, id: customer.id
+
+    assert_response :success
+    assert_equal "Stuff", json_response["name"]
   end
 end

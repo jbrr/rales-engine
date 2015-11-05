@@ -29,12 +29,25 @@ class Api::V1::MerchantsController < ApplicationController
     respond_with Merchant.find_by(merchant_params).invoices
   end
 
+  def revenue
+    respond_with Merchant.revenue(merchant_params)
+  end
+
+  def favorite_customer
+    respond_with Merchant.favorite_customer(params[:id])
+  end
+
+  def customers_with_pending_invoices
+    respond_with Merchant.pending_customers(params[:id])
+  end
+
   private
 
   def merchant_params
     params.permit(:id,
                   :name,
                   :created_at,
-                  :updated_at)
+                  :updated_at,
+                  :date)
   end
 end

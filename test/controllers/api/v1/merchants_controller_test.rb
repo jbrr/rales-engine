@@ -76,7 +76,7 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     get :revenue, format: :json, id: merchant.id
 
     assert_response :success
-    response = {"revenue" => "990.22"}
+    response = { "revenue" => "990.22" }
     assert_equal response, json_response
   end
 
@@ -84,7 +84,7 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     get :revenue, format: :json, id: merchant.id, date: "2012-03-26 09:55:09"
 
     assert_response :success
-    response = {"revenue" => "378.56"}
+    response = { "revenue" => "378.56" }
     assert_equal response, json_response
   end
 

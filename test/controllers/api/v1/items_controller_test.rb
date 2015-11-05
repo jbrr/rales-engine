@@ -66,7 +66,7 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     get :best_day, format: :json, id: item.id
 
     assert_response :success
-    response = {"best_day"=>"2012-03-27T14:54:09.000Z"}
+    response = { "best_day" => "2012-03-27T14:54:09.000Z" }
     assert_equal response, json_response
   end
 end

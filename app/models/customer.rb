@@ -4,7 +4,7 @@ class Customer < ActiveRecord::Base
 
   def self.favorite_merchant(id)
     customer = Customer.find(id)
-    merchant_id = customer.invoices.successful_transactions.group_by(&:merchant_id).max_by{ |k, v| v.count}.flatten.first
+    merchant_id = customer.invoices.successful_transactions.group_by(&:merchant_id).max_by { |k, v| v.count }.flatten.first
     Merchant.find(merchant_id)
   end
 end

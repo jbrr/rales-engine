@@ -25,6 +25,7 @@ Rails.application.routes.draw do
           get "invoices"
           get "revenue"
           get "favorite_customer"
+          get "customers_with_pending_invoices"
         end
       end
       resources :invoices, except: [:new, :edit], defaults: { format: :json } do
@@ -63,6 +64,7 @@ Rails.application.routes.draw do
         member do
           get "invoice_items"
           get "merchant"
+          get "best_day"
         end
       end
 

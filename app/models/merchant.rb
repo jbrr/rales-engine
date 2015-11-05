@@ -19,4 +19,9 @@ class Merchant < ActiveRecord::Base
     customer_id = merchant.invoices.successful_transactions.group_by(&:customer_id).max_by { |k, v| v.count }.flatten.first
     Customer.find(customer_id)
   end
+
+  def self.pending_customers(id)
+    merchant = Merchant.find(id)
+    merchant.invoices.pending_transactions.joins(:customer).distinct
+  end
 end

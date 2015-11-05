@@ -8,4 +8,8 @@ class Invoice < ActiveRecord::Base
   def self.successful_transactions
     joins(:transactions).where("result = 'success'")
   end
+
+  def self.pending_transactions
+    joins(:transactions).where("result = 'failed'")
+  end
 end

@@ -30,13 +30,14 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def best_day
-    respond_with Item.best_day(params[:id])
+    item = Item.find(params[:id]).best_day
+    respond_with serialized_message(item)
   end
 
   private
 
   def item_params
-    unit_price
+    format_unit_price
     params.permit(:id,
                   :name,
                   :description,
@@ -45,10 +46,8 @@ class Api::V1::ItemsController < ApplicationController
                   :created_at,
                   :updated_at)
   end
+end
 
-  def unit_price
-    if params[:unit_price]
-      params["unit_price"] = BigDecimal.new(params["unit_price"]) * 100
-    end
-  end
+def serialized_message(item)
+  ItemSerializer.new(item).best_day
 end

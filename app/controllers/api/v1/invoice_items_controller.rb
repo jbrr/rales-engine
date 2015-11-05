@@ -32,7 +32,7 @@ class Api::V1::InvoiceItemsController < ApplicationController
   private
 
   def invoice_item_params
-    unit_price
+    format_unit_price
     params.permit(:id,
                   :item_id,
                   :invoice_id,
@@ -40,11 +40,5 @@ class Api::V1::InvoiceItemsController < ApplicationController
                   :unit_price,
                   :created_at,
                   :updated_at)
-  end
-
-  def unit_price
-    if params[:unit_price]
-      params["unit_price"] = BigDecimal.new(params["unit_price"]) * 100
-    end
   end
 end

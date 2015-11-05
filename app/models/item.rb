@@ -4,6 +4,7 @@ class Item < ActiveRecord::Base
   belongs_to :merchant
 
   def best_day
-    best = invoices.successful_transactions.group('"invoices"."created_at"').order("sum_quantity DESC").sum("quantity").first[0]
+    invoices.successful_transactions.group('"invoices"."created_at"')
+      .order("sum_quantity DESC").sum("quantity").first[0]
   end
 end

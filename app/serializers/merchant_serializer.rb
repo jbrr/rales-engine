@@ -5,6 +5,6 @@ class MerchantSerializer < ActiveModel::Serializer
              :updated_at
 
   def revenue
-    { revenue: (object.to_f / 100).to_s } 
+    { revenue: (object.to_f / 100).to_s }
   end
 end

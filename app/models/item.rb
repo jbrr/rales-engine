@@ -5,7 +5,7 @@ class Item < ActiveRecord::Base
 
   def self.best_day(id)
     item = Item.find(id)
-    best = item.invoice_items.successful_transactions.group("invoices.created_at").order("sum_quantity DESC").sum("quantity").first[0]
+    best = item.invoices.successful_transactions.group('"invoices"."created_at"').sum("quantity * unit_price").max_by(&:last).first
     { best_day: best }
   end
 end
